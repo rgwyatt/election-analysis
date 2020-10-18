@@ -47,7 +47,15 @@ with open(file_to_load) as election_data:
 
 # Save the results to our text file.
 with open(file_to_save, "w") as txt_file:
-
+# Print the final vote count to the terminal.
+    election_results = (
+        f"\nElection Results\n"
+        f"-------------------------\n"
+        f"Total Votes: {total_votes:,}\n"
+        f"-------------------------\n")
+    print(election_results, end="")
+    # Save the final vote count to the text file.
+    txt_file.write(election_results) 
 ## % of votes each candidate won
     for candidate_name in candidate_votes:
         votes = candidate_votes[candidate_name]
@@ -73,16 +81,7 @@ with open(file_to_save, "w") as txt_file:
         f"Winning Percentage: {winning_percentage:.1f}%\n"
         f"-------------------------\n")
     #print(winning_candidate_summary)
-
-# Print the final vote count to the terminal.
-    election_results = (
-        f"\nElection Results\n"
-        f"-------------------------\n"
-        f"Total Votes: {total_votes:,}\n"
-        f"-------------------------\n")
-    print(election_results, end="")
-    # Save the final vote count to the text file.
-    txt_file.write(election_results)  
+ 
     # Save the winning candidate's name to the text file.
     txt_file.write(winning_candidate_summary)
 ## Create a filename variable to a direct or indirect path to the file. || file_to_save = os.path.join("analysis", "election_analysis.txt")
