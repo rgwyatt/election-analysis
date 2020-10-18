@@ -45,6 +45,9 @@ with open(file_to_load) as election_data:
     #print(total_votes)
     #print(candidate_votes)
 
+# Save the results to our text file.
+with open(file_to_save, "w") as txt_file:
+
 ## % of votes each candidate won
     for candidate_name in candidate_votes:
         votes = candidate_votes[candidate_name]
@@ -56,7 +59,11 @@ with open(file_to_load) as election_data:
             winning_count = votes
             winning_percentage = vote_percentage
             winning_candidate = candidate_name
-            print(f"{candidate_name}: {vote_percentage:.1f}% ({votes:,})\n")
+        candidate_results = (f"{candidate_name}: {vote_percentage:.1f}% ({votes:,})\n")
+        # Print each candidate, their voter count, and percentage to the terminal.
+        print(candidate_results)
+        #  Save the candidate results to our text file.
+        txt_file.write(candidate_results)
 
 # OUTPUT THE DATA
     winning_candidate_summary = (
@@ -65,7 +72,19 @@ with open(file_to_load) as election_data:
         f"Winning Vote Count: {winning_count:,}\n"
         f"Winning Percentage: {winning_percentage:.1f}%\n"
         f"-------------------------\n")
-    print(winning_candidate_summary)
+    #print(winning_candidate_summary)
+
+# Print the final vote count to the terminal.
+    election_results = (
+        f"\nElection Results\n"
+        f"-------------------------\n"
+        f"Total Votes: {total_votes:,}\n"
+        f"-------------------------\n")
+    print(election_results, end="")
+    # Save the final vote count to the text file.
+    txt_file.write(election_results)  
+    # Save the winning candidate's name to the text file.
+    txt_file.write(winning_candidate_summary)
 ## Create a filename variable to a direct or indirect path to the file. || file_to_save = os.path.join("analysis", "election_analysis.txt")
 ## Using the with statement open the file as a text file. || with open(file_to_save, "w") as txt_file: ||    ## Write some data to the file. ||    txt_file.write("Counties in the Election\n-------------------------\nArapahoe\nDenver\nJefferson")
 # Close the file source || ### election_data.close()
